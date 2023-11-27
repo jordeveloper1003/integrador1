@@ -201,6 +201,9 @@ iframe {
 .navbar-list {
   gap: 30px;
 }
+.navbar-list .button a {
+  color: var(--body-color);
+}
 
 .navbar-list a {
   color: var(--text-gray);
