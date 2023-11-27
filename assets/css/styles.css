@@ -154,14 +154,142 @@ iframe {
 }
 
 /*=============== HEADER & NAV===============*/
+/*  ================== HEADER ==================*/
+/* Ocultamos menu hamburgesa */
+#menu-toggle,
+#cart-toggle,
+.menu-label {
+  display: none;
+}
+
+/* Toggle para el overlay */
+#cart-toggle:checked ~ .overlay,
+#menu-toggle:checked ~ .overlay {
+  display: block;
+}
+
 .header {
+  /* background: var(--secondary); */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
   position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
+  height: 65px;
+  z-index: 2;
+
+  /* Agregado en la clase mediaquieries */
   background-color: var(--body-color);
-  z-index: var(--z-fixed);
-  transition: 0.4s;
+}
+
+.logo {
+  height: 40%;
+}
+
+.navbar,
+.navbar-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar {
+  gap: 10rem;
+}
+
+.navbar-list {
+  gap: 30px;
+}
+
+.navbar-list a {
+  color: var(--text-gray);
+  font-size: var(--font-sm);
+}
+
+/* Efectos para los elementos a del navbar */
+.navbar-list li {
+  position: relative;
+}
+
+.navbar-list li a::after {
+  content: "";
+  height: 2px;
+  width: 100%;
+  background-color: var(--text-white);
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  /* Efecto empieza aca */
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.15s ease;
+}
+
+.navbar-list a:hover::after {
+  transform-origin: bottom left;
+  transform: scaleX(1);
+}
+
+/* TODO: PSEUDOCLASE */
+.font a {
+  font-weight: var(--font-semibold);
+  color: var(--text-white);
+}
+/* .navbar-list li:first-child > a {
+  font-weight: var(--font-semibold);
+  color: var(--text-white);
+} */
+
+#cart-toggle:checked ~ .cart {
+  transform: translateX(0);
+}
+/* ---------- */
+
+/* animaciones */
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(100px);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-right {
+  from {
+    transform: translateX(100px);
+  }
+
+  to {
+    transform: translateX(0px);
+  }
+}
+
+@keyframes blink {
+  to {
+    opacity: 0;
+    background-color: transparent;
+  }
+}
+
+@keyframes typewriter {
+  to {
+    left: 100%;
+  }
 }
 
 .nav {
@@ -344,6 +472,10 @@ iframe {
   border-radius: 0.5rem;
   font-weight: var(--font-medium);
   transition: 0.4s;
+}
+.singin {
+  display: flexbox;
+  align-items: center;
 }
 
 .button:hover {
@@ -743,7 +875,7 @@ iframe {
   font-size: var(--smaller-font-size);
   padding: 0.25rem;
   background-color: var(--body-color);
-  z-index: 10;
+  z-index: 1;
 }
 
 .contact__form-area {
@@ -1026,5 +1158,48 @@ iframe {
     font-size: 1.25rem;
     padding: 0.4rem;
     border-radius: 0.5rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .menu-label {
+    display: flex;
+    order: 2;
+  }
+
+  .menu-label img {
+    height: 20px;
+    width: 25px;
+  }
+
+  .navbar {
+    gap: 30px;
+  }
+
+  .navbar-list {
+    position: absolute;
+    top: 65px;
+    width: 90%;
+    left: 5%;
+    right: 5%;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: var(--body-color);
+    border: 2px solid var(--electric);
+    border-top: 0;
+    padding: 45px 30px;
+    border-radius: 0 0 15px 15px;
+    /* display: none; */
+    z-index: 3;
+    transform: translateX(200%);
+    transition: all 0.5s ease;
+  }
+
+  /* #menu-toggle:checked ~ .navbar-list {
+    display: flex;
+  } */
+
+  #menu-toggle:checked ~ .navbar-list {
+    transform: translateX(0);
   }
 }
